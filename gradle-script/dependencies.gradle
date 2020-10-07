@@ -1,0 +1,127 @@
+ext {
+
+    HOST_URL = "https://dl.dropboxusercontent.com/"
+    DATABASE_NAME = "facts.db"
+    DATABASE_VERSION = "1"
+
+/*  App details ..................................................*/
+    appId = "com.antonystudio.facts"
+    minVersion = 15
+    targetVersion = 29
+    buildVersion = "29.0.3"
+    versionCode = 1
+    versionName = "1.0"
+
+    /*  App plugins ..................................................*/
+    applicationPlugin = 'com.android.application'
+    kotlinPlugin = 'kotlin-android'
+    kotlinAndroidPlugin = 'kotlin-android-extensions'
+    kotlinKaptPlugin = 'kotlin-kapt'
+
+    /*  Gradle Libraries ..................................................*/
+    androidGradleVersion = '4.0.1'
+    androidSupportPackage = 'com.android.tools.build:gradle'
+
+    kotlinPluginVersion = '1.3.72'
+    kotlinSupportPackage = "org.jetbrains.kotlin:kotlin-gradle-plugin"
+    kotlinPackage = 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    supportCoreVersion = '1.3.1'
+    ktxPackage = 'androidx.core:core-ktx'
+
+    constraintLayoutVersion = '2.0.0-beta4'
+    constraintLayoutPackage = 'androidx.constraintlayout:constraintlayout'
+
+    supportVersion = '1.1.0'
+    appCompatPackage = 'androidx.appcompat:appcompat'
+    recyclerViewPackage = 'androidx.recyclerview:recyclerview'
+    materialPackage = 'com.google.android.material:material'
+    swipeToRefreshPackage = 'androidx.swiperefreshlayout:swiperefreshlayout'
+
+    cardViewVersion = '1.0.0'
+    cardViewPackage = 'androidx.cardview:cardview'
+
+    retrofitVersion = '2.5.0'
+    retrofitNetworkCallPackage = 'com.squareup.retrofit2:retrofit'
+    retrofitGsonConverterPackage = 'com.squareup.retrofit2:converter-gson'
+    retrofitRxjavaAdapterPackage = 'com.squareup.retrofit2:adapter-rxjava2'
+
+    okhttpVersion = '3.12.0'
+    okhttpPackage = 'com.squareup.okhttp3:logging-interceptor'
+
+    glideVersion = '4.10.0'
+    glidePackage = 'com.github.bumptech.glide:glide'
+
+    rxBindingVersion = '3.1.0'
+    rxBindingPackage = 'com.jakewharton.rxbinding3:rxbinding'
+
+    rxJava2Version = '2.2.2'
+    rxJava2Package = 'io.reactivex.rxjava2:rxjava'
+
+    rxAndroid2Version = '2.1.1'
+    rxAndroid2Package = 'io.reactivex.rxjava2:rxandroid'
+
+    roomVersion = '2.2.5'
+    roomRuntimePackage = 'androidx.room:room-runtime'
+    roomCompilerPackage = 'androidx.room:room-compiler'
+    roomKtxPackage = 'androidx.room:room-ktx'
+    roomRxjava2Package = 'androidx.room:room-rxjava2'
+
+    coroutineVersion = "1.3.0"
+    coroutinePackage = "org.jetbrains.kotlinx:kotlinx-coroutines-android"
+
+    viewModelVersion = '2.2.0'
+    viewModelPackage = 'androidx.lifecycle:lifecycle-viewmodel-ktx'
+
+    mockitoVersion = '2.19.0'
+    mockitoInLinePackage = 'org.mockito:mockito-inline'
+    mockitoCorePackage = 'org.mockito:mockito-core'
+
+    archCoreVersion = '2.1.0'
+    archCorePackage = 'androidx.arch.core:core-testing'
+
+    androidGradleSupport = buildDependency(androidSupportPackage, androidGradleVersion)
+    kotlinGradleSupport = buildDependency(kotlinSupportPackage, kotlinPluginVersion)
+    kotlinSupport = buildDependency(kotlinPackage, kotlinPluginVersion)
+    okHttpInterceptor = buildDependency(okhttpPackage, okhttpVersion)
+    glide = buildDependency(glidePackage, glideVersion)
+    rxViewBinding = buildDependency(rxBindingPackage, rxBindingVersion)
+    rxJava2 = buildDependency(rxJava2Package, rxJava2Version)
+    rxAndroid2 = buildDependency(rxAndroid2Package, rxAndroid2Version)
+
+    kotlinCoroutine = buildDependency(coroutinePackage, coroutineVersion)
+    viewModelLifecycle = buildDependency(viewModelPackage, viewModelVersion)
+
+    androidSupport = [
+            appCompat      : buildDependency(appCompatPackage, supportVersion),
+            ktx            : buildDependency(ktxPackage, supportCoreVersion),
+            recyclerView   : buildDependency(recyclerViewPackage, supportVersion),
+            materialDesign : buildDependency(materialPackage, supportVersion),
+            cardView       : buildDependency(cardViewPackage, cardViewVersion),
+            constrainLayout: buildDependency(constraintLayoutPackage, constraintLayoutVersion),
+            swipeToRefresh : buildDependency(swipeToRefreshPackage, supportVersion)
+    ]
+    retrofit = [
+            networkCall  : buildDependency(retrofitNetworkCallPackage, retrofitVersion),
+            gsonConverter: buildDependency(retrofitGsonConverterPackage, retrofitVersion),
+            rxJava       : buildDependency(retrofitRxjavaAdapterPackage, retrofitVersion)
+    ]
+
+    roomDB = [
+            runtime : buildDependency(roomRuntimePackage, roomVersion),
+            compiler: buildDependency(roomCompilerPackage, roomVersion),
+            ktx     : buildDependency(roomKtxPackage, roomVersion),
+            rxjava  : buildDependency(roomRxjava2Package, roomVersion)
+    ]
+    testing = [
+            mockitoInline: buildDependency(mockitoInLinePackage, mockitoVersion),
+            mockitoCore  : buildDependency(mockitoCorePackage, mockitoVersion),
+            archCore     : buildDependency(archCorePackage, archCoreVersion)
+    ]
+
+}
+
+
+static String buildDependency(String packageName, String version) {
+    return "${packageName}:${version}"
+}

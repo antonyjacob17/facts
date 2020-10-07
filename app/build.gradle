@@ -1,0 +1,104 @@
+apply plugin: applicationPlugin
+apply plugin: kotlinPlugin
+apply plugin: kotlinAndroidPlugin
+apply plugin: kotlinKaptPlugin
+
+def hostUrl = HOST_URL
+def databaseName = DATABASE_NAME
+def databaseVersion = DATABASE_VERSION
+
+android {
+    compileSdkVersion targetVersion
+    buildToolsVersion buildVersion
+
+    defaultConfig {
+        applicationId appId
+        minSdkVersion minVersion
+        targetSdkVersion targetVersion
+        versionCode versionCode
+        versionName versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    buildTypes {
+        buildTypes.each { it.buildConfigField "String", "HOST_URL", "\"${hostUrl}\"" }
+        buildTypes.each { it.buildConfigField "String", "DB_NAME", "\"${databaseName}\"" }
+        buildTypes.each { it.buildConfigField "int", "DB_VERSION", "${databaseVersion}" }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    // Kotlin Support
+    implementation kotlinSupport
+
+    // Android UI Support
+    implementation androidSupport.ktx
+    implementation androidSupport.appCompat
+    implementation androidSupport.constrainLayout
+    implementation androidSupport.recyclerView
+    implementation androidSupport.materialDesign
+    implementation androidSupport.swipeToRefresh
+
+    // RxJava + RxAndroid
+    implementation rxJava2
+    implementation rxAndroid2
+
+    // RxBinding for UI
+    implementation rxViewBinding
+
+    // Room Database RxRoom
+    implementation roomDB.runtime
+    kapt roomDB.compiler
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation roomDB.ktx
+
+    // Glide - Image Loader
+    implementation glide
+
+    // HTTP Login Interceptor
+    implementation okHttpInterceptor
+
+    // Retrofit Api Calling Architecture
+    implementation retrofit.networkCall
+
+    // JSON to Response Class converter
+    implementation retrofit.gsonConverter
+    implementation retrofit.rxJava
+
+    //Lifecycle view model libs
+    implementation viewModelLifecycle
+    implementation kotlinCoroutine
+
+    //unit test libs
+    testImplementation testing.mockitoInline
+    testImplementation testing.mockitoCore
+    testImplementation testing.archCore
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+}

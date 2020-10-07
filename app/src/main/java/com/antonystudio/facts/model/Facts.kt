@@ -1,0 +1,57 @@
+package com.antonystudio.facts.model
+
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.antonystudio.facts.database.constants.Columns
+import com.antonystudio.facts.database.constants.Tables
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+
+@Entity(tableName = Tables.TABLE_FACTS)
+data class Facts(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int
+) {
+
+    @ColumnInfo(name = Columns.ItemTitle, defaultValue = "")
+    @SerializedName("title")
+    @Expose
+    var itemTitle: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.Description, defaultValue = "")
+    @SerializedName("description")
+    @Expose
+    var itemDescription: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.ImageUrl, defaultValue = "")
+    @SerializedName("imageHref")
+    @Expose
+    var imageUrl: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    @ColumnInfo(name = Columns.Title, defaultValue = "")
+    var mainTitle: String? = ""
+        get() = field ?: ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    //variable for avoiding loading failed images again and again
+    var isBadImage: Boolean = false
+
+    //fun for avoiding objects with all empty parameters
+    fun filterData() =
+        !imageUrl.isNullOrEmpty() || !itemTitle.isNullOrEmpty() || !itemDescription.isNullOrEmpty()
+}
