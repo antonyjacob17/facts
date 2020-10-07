@@ -58,7 +58,7 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
             when (it) {
                 is NetworkState.LoadingData -> {
                     tvNoItem.visibility = View.GONE
-                    if (!swpRefresh.isRefreshing && factsItemAdapter.itemCount == 0) {
+                    if (!swipeRefresh.isRefreshing && factsItemAdapter.itemCount == 0) {
                         progressBar.visibility = View.VISIBLE
                     }
                 }
@@ -86,7 +86,7 @@ class MainActivity : BaseActivity<MainActivityViewModel>() {
 
     //Method for managing the progress bar
     private fun manageProgressBar() {
-        swpRefresh.isRefreshing = false
+        swipeRefresh.isRefreshing = false
         progressBar.visibility = View.GONE
     }
 
